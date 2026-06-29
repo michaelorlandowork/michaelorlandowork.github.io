@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Michael Orlando — Project Manager</title>
+<meta name="description" content="Michael Orlando — PMP-certified project manager. From clean water in 12 villages to national health apps, I build things that reach real people." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<!--
+  ============================================================
+  PALETTE: two colors only — #010101 (black) + #FFFFFF (white),
+  with grayscale derived from those two. No accent color.
+  FONT: Inter (clean Helvetica-style grotesk), heavy weights for display.
+  PHOTOS: styled PLACEHOLDERS (picsum.photos), rendered dark + grayscale
+  so random images read as one intentional set. To use your own, drop a
+  file in this folder and replace the URL. Comments mark what fits each spot.
+  ============================================================
+-->
+<style>
+  :root{
+    --bg:#010101;
+    --ink:#ffffff;
+    --soft:#e9e9e7;          /* body text */
+    --ghost:#5c5c5a;          /* faint oversized headline — lighter grey, readable */
+    --muted:#8a8a8a;
+    --line:rgba(255,255,255,.13);
+    --accent:#F26A21;          /* warm orange — used sparingly */
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--soft);line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  .mono{text-transform:uppercase;letter-spacing:.2em;font-size:.72rem;font-weight:600;color:var(--muted)}
+  h1,h2,h3{color:var(--ink)}
+
+  /* nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:60;background:transparent;transition:background .35s,border-color .35s;border-bottom:1px solid transparent}
+  nav.scrolled{background:rgba(1,1,1,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{font-weight:800;font-size:1rem;letter-spacing:-.02em;color:var(--ink)}
+  .brand .d{color:var(--accent)}
+  .nav-links{display:flex;gap:30px}
+  .nav-links a{text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:600;color:var(--muted);transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  @media(max-width:720px){.nav-links{display:none}}
+
+  /* hero */
+  .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:120px 0 60px}
+  .hero-photo{position:absolute;inset:-10% 0;z-index:0;background-size:cover;background-position:center;will-change:transform}
+  .hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,1,1,.5),rgba(1,1,1,.92))}
+  .hero .wrap{position:relative;z-index:2;width:100%}
+  .hero .tagline{margin-bottom:30px}
+  .hl{font-weight:800;letter-spacing:-.045em;line-height:.92;font-size:clamp(3.6rem,12vw,9.5rem);color:var(--ink)}
+  .hl .ghost{color:var(--ghost)}
+  .hero-lower{margin-top:48px;max-width:720px}
+  .hero-lower .body{font-size:clamp(1.15rem,2.3vw,1.6rem);font-weight:400;color:var(--soft);line-height:1.4}
+  .hero-lower .body b{font-weight:600;color:var(--ink)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:9px;text-transform:uppercase;letter-spacing:.12em;font-size:.74rem;font-weight:700;padding:16px 24px;border-radius:2px;transition:transform .18s,background .2s,color .2s;border:1px solid var(--ink)}
+  .btn-solid{background:var(--ink);color:var(--bg)}
+  .btn-solid:hover{background:transparent;color:var(--ink);transform:translateY(-2px)}
+  .btn-out{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn-out:hover{border-color:var(--ink);transform:translateY(-2px)}
+  .scroll-cue{position:absolute;bottom:26px;left:32px;z-index:2}
+  .scroll-cue .l{width:1px;height:40px;background:linear-gradient(var(--accent),transparent);margin-top:8px;animation:cue 1.9s ease-in-out infinite;transform-origin:top}
+  @keyframes cue{0%,100%{transform:scaleY(.5);opacity:.35}50%{transform:scaleY(1);opacity:1}}
+
+  /* marquee */
+  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:#000;padding:18px 0}
+  .marquee-track{display:flex;gap:42px;white-space:nowrap;width:max-content;animation:scrollx 34s linear infinite}
+  .marquee-track span{text-transform:uppercase;letter-spacing:.2em;font-size:.82rem;font-weight:600;color:var(--muted)}
+  .marquee-track span.s{color:var(--ink)}
+  .marquee-track span.a{color:var(--accent)}
+  @keyframes scrollx{to{transform:translateX(-50%)}}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr)}
+  .stat{padding:46px 28px;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:none}
+  .stat .num{font-size:3rem;font-weight:800;letter-spacing:-.04em;color:var(--ink)}
+  .stat .num .a{color:var(--accent)}
+  .stat .lab{margin-top:12px}
+  @media(max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:none}.stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--line)}}
+
+  /* sections */
+  section{padding:120px 0}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:58px;border-bottom:1px solid var(--line);padding-bottom:24px}
+  .sec-head h2{font-size:clamp(2.2rem,5.5vw,4rem);font-weight:800;letter-spacing:-.04em;line-height:.95}
+  .sec-head .idx{white-space:nowrap;color:var(--accent)}
+
+  /* experience */
+  .xp{border-top:1px solid var(--line)}
+  .xp-row{padding:36px 0;border-bottom:1px solid var(--line);transition:padding-left .35s,background .35s}
+  .xp-row:hover{padding-left:20px;background:linear-gradient(90deg,rgba(255,255,255,.04),transparent)}
+  .xp-top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px}
+  .xp-role{font-size:1.8rem;font-weight:800;letter-spacing:-.03em;color:var(--ink)}
+  .xp-org{color:#c9c9c5;font-size:1rem;margin-top:3px}
+  .xp ul{list-style:none;margin-top:16px;max-width:840px;display:flex;flex-direction:column;gap:9px}
+  .xp ul li{position:relative;padding-left:24px;color:#b6b6b2;font-size:1rem}
+  .xp ul li::before{content:'—';position:absolute;left:0;color:var(--accent)}
+
+  /* band */
+  .band{position:relative;min-height:80vh;display:flex;align-items:flex-end;overflow:hidden}
+  .band-photo{position:absolute;inset:-10% 0;z-index:0;background-size:cover;background-position:center}
+  .band-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,1,1,.3),rgba(1,1,1,.88))}
+  .band .wrap{position:relative;z-index:2;padding-bottom:72px}
+  .band h2{font-size:clamp(2.6rem,8vw,6rem);font-weight:800;letter-spacing:-.04em;line-height:.94;max-width:980px;margin-top:14px;color:var(--ink)}
+  .band p{max-width:560px;margin-top:20px;color:var(--soft);font-size:1.1rem}
+  .band .mono{color:var(--accent)}
+
+  /* projects */
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  @media(max-width:760px){.proj-grid{grid-template-columns:1fr}}
+  .proj{background:var(--bg);position:relative;overflow:hidden}
+  .proj-photo{position:relative;height:270px;overflow:hidden}
+  .proj-photo .pimg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s ease}
+  .proj:hover .proj-photo .pimg{transform:scale(1.05)}
+  .proj-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,1,1,.1),rgba(1,1,1,.72))}
+  .proj-photo .ptag{position:absolute;left:24px;bottom:18px;z-index:2;color:var(--ink)}
+  .proj-body{padding:32px 32px 36px}
+  .proj h3{font-size:1.7rem;font-weight:800;letter-spacing:-.03em;line-height:1.04}
+  .proj .ctx{color:var(--muted);margin-top:8px;font-size:.95rem}
+  .proj p.summary{color:#b6b6b2;margin-top:16px;font-size:1rem}
+  .metrics{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .chip{font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;border:1px solid var(--line);border-radius:2px;padding:8px 12px;color:#cfcfca}
+  .chip b{color:var(--ink);font-weight:800}
+  .proj details{margin-top:20px;border-top:1px solid var(--line);padding-top:18px}
+  .proj summary{cursor:pointer;list-style:none;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:10px}
+  .proj summary::-webkit-details-marker{display:none}
+  .proj summary .chev{transition:transform .25s}
+  .proj details[open] summary .chev{transform:rotate(90deg)}
+  .proj details ul{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:10px}
+  .proj details li{position:relative;padding-left:22px;color:#b6b6b2;font-size:.95rem}
+  .proj details li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+
+  /* skills */
+  .skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  @media(max-width:760px){.skill-grid{grid-template-columns:1fr}}
+  .skill-card{background:var(--bg);padding:36px 30px}
+  .skill-card h3{font-size:1.25rem;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;display:flex;align-items:baseline;gap:10px}
+  .skill-card h3 .n{color:var(--muted);font-size:.78rem;font-weight:600}
+  .tags{display:flex;flex-wrap:wrap;gap:9px}
+  .tag{font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;font-weight:600;border:1px solid var(--line);border-radius:2px;padding:8px 12px;color:#cfcfca}
+
+  /* life / hobbies */
+  .hobby-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+  @media(max-width:760px){.hobby-grid{grid-template-columns:1fr}}
+  .hobby{background:var(--bg);padding:42px 36px}
+  .hobby .k{margin-bottom:16px;color:var(--accent)}
+  .hobby h3{font-size:2.1rem;font-weight:800;letter-spacing:-.03em}
+  .hobby p{color:#b6b6b2;margin-top:14px;max-width:460px;font-size:1.02rem}
+  .photo-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:26px}
+  .photo-strip .ph{aspect-ratio:1/1;background-size:cover;background-position:center;border-radius:2px;transition:transform .4s}
+  .photo-strip .ph:hover{transform:scale(1.04)}
+
+  /* education */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+  @media(max-width:760px){.two-col{grid-template-columns:1fr}}
+  .panel{background:var(--bg);padding:36px 32px}
+  .panel h3{font-size:1.4rem;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+  .panel .sub{color:var(--ink);font-size:.98rem}
+  .panel .meta{color:var(--muted);font-size:.9rem;margin-top:6px}
+  .cert-item{padding:18px 0;border-bottom:1px solid var(--line)}
+  .cert-item:last-child{border-bottom:none}
+  .cert-item .t{font-weight:600;color:var(--ink)}
+  .cert-item .d{color:var(--muted);font-size:.9rem;margin-top:4px}
+
+  /* closer */
+  .closer{position:relative;overflow:hidden;padding:160px 0;text-align:center}
+  .closer-photo{position:absolute;inset:-10% 0;z-index:0;background-size:cover;background-position:center}
+  .closer-photo::after{content:'';position:absolute;inset:0;background:rgba(1,1,1,.72)}
+  .closer .wrap{position:relative;z-index:2}
+  .closer .k{margin-bottom:20px;color:var(--accent)}
+  .closer h2{font-size:clamp(2.8rem,9vw,6.5rem);font-weight:800;letter-spacing:-.045em;line-height:.92}
+  .closer .cta-row{justify-content:center;margin-top:40px}
+  footer{border-top:1px solid var(--line);padding:38px 0}
+  .foot-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(48px);transition:opacity 1.1s cubic-bezier(.16,1,.3,1),transform 1.1s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}
+  .hl .line{display:block;padding-bottom:.06em}
+  .hl .line i{display:block;font-style:normal;transform:translateY(42px);opacity:0;transition:transform 1.1s cubic-bezier(.16,1,.3,1),opacity 1s ease}
+  .hl.in .line i{transform:none;opacity:1}
+  .hl.in .line:nth-child(2) i{transition-delay:.12s}
+  @media(prefers-reduced-motion:reduce){.reveal,.hl .line i{opacity:1;transform:none;transition:none}.hero-photo,.band-photo,.closer-photo{transform:none!important}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">Michael Orlando<span class="d">.</span></a>
+    <div class="nav-links">
+      <a href="#top">Home</a>
+      <a href="#work">Work</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#life">Life</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO · swap: a wide, moody photo of you on-site or a Jakarta street at dusk -->
+<header class="hero" id="top">
+  <div class="hero-photo js-parallax" data-speed="0.16" style="background-image:url('hero.JPG')"></div>
+  <div class="wrap">
+    <div class="tagline mono">Project Manager · PMP · Jakarta ↔ Seattle</div>
+    <h1 class="hl"><span class="line"><i>I build things</i></span><span class="line ghost"><i>that reach people.</i></span></h1>
+    <div class="hero-lower">
+      <p class="body">From clean water in <b>12 villages</b> to national health apps used across <b>44 clinics</b> — I'm a PMP-certified project manager who connects international teams with on-the-ground delivery in Indonesia.</p>
+      <div class="cta-row">
+        <a class="btn btn-solid" href="Michael_Orlando_Resume_2026_New.pdf" download>Download résumé</a>
+        <a class="btn btn-out" href="#projects">See the work</a>
+        <a class="btn btn-out" href="#contact">Get in touch</a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="mono">Scroll</span><div class="l"></div></div>
+</header>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="s">PMP certified</span><span class="a">·</span><span class="s">cross-border delivery</span><span class="a">·</span><span class="s">30+ projects managed</span><span class="a">·</span><span class="s">Jakarta ↔ Seattle</span><span class="a">·</span><span class="s">every project ships</span><span class="a">·</span>
+    <span class="s">PMP certified</span><span class="a">·</span><span class="s">cross-border delivery</span><span class="a">·</span><span class="s">30+ projects managed</span><span class="a">·</span><span class="s">Jakarta ↔ Seattle</span><span class="a">·</span><span class="s">every project ships</span><span class="a">·</span>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat reveal"><div class="num">30<span class="a">+</span></div><div class="lab mono">concurrent projects</div></div>
+  <div class="stat reveal d1"><div class="num">20<span class="a">%</span></div><div class="lab mono">productivity gain</div></div>
+  <div class="stat reveal d2"><div class="num">6,000<span class="a">+</span></div><div class="lab mono">residents served</div></div>
+  <div class="stat reveal d3"><div class="num">100<span class="a">%</span></div><div class="lab mono">on-time delivery</div></div>
+</div>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Work</h2><span class="idx mono">01 — Experience</span></div>
+    <div class="xp">
+      <div class="xp-row">
+        <div class="xp-top"><div><div class="xp-role">Project Manager</div><div class="xp-org">Ministry of Health × Akselerasa — Jakarta, Indonesia</div></div><div class="mono">02/2025 — Now</div></div>
+        <ul>
+          <li>Delivered a citizen-facing app for a national free health-screening program, integrating national ID (KTP) data so residents across 44 puskesmas could access screening results digitally for the first time.</li>
+          <li>Coordinated an AI tuberculosis-detection clinical trial between an India-based AI vendor and 2 government hospitals, enabling ~3,000 chest X-ray scans under strict patient-data privacy controls.</li>
+          <li>Led a government hospital ERP migration with zero downtime and zero data loss, navigating a broken vendor relationship and missing source code.</li>
+        </ul>
+      </div>
+      <div class="xp-row">
+        <div class="xp-top"><div><div class="xp-role">Project Coordinator</div><div class="xp-org">Amazon Web Services — Seattle, WA, USA</div></div><div class="mono">09/2022 — 09/2024</div></div>
+        <ul>
+          <li>Implemented an automated Asana workflow managing 30+ concurrent projects, generating leadership dashboards that drove a 20% productivity increase and a 100% on-time delivery rate.</li>
+          <li>Spearheaded a cross-continental knowledge-sharing program connecting IT warehouse teams across Europe and Asia, delivering 2 process-improvement projects.</li>
+          <li>Established standardized dashboards in Smartsheet and QuickSight, and revamped 25+ SOPs — cutting error rates 20% and cycle time 10%.</li>
+        </ul>
+      </div>
+      <div class="xp-row">
+        <div class="xp-top"><div><div class="xp-role">Lead Project Manager</div><div class="xp-org">Solar Chapter — Seattle, USA / Indonesia</div></div><div class="mono">01/2019 — 05/2024</div></div>
+        <ul>
+          <li>Delivered clean-water access to 6,000+ residents across 12 Indonesian villages, leading full project lifecycles — budgeting, procurement, and logistics — on time and within budget.</li>
+          <li>Produced a data-driven post-implementation impact report that secured a 40% increase in sponsor funding.</li>
+        </ul>
+      </div>
+      <div class="xp-row">
+        <div class="xp-top"><div><div class="xp-role">Business Analyst Intern</div><div class="xp-org">Alfamart — Jakarta, Indonesia</div></div><div class="mono">06/2021 — 09/2021</div></div>
+        <ul>
+          <li>Optimized product-placement strategy using SQL, Excel, and Tableau, improving market-expansion efficiency by 18% across grocery locations.</li>
+          <li>Analyzed sales history to align promotional campaigns with supplier targets, surpassing the annual sales goal by 20%.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BAND 1 · swap: a Solar Chapter village / clean-water photo -->
+<div class="band">
+  <div class="band-photo js-parallax" data-speed="0.13" style="background-image:url('https://picsum.photos/seed/mo-water9/1920/1200')"></div>
+  <div class="wrap reveal">
+    <div class="mono">Impact at scale</div>
+    <h2>Clean water for 6,000+ people, across 12 villages.</h2>
+    <p>Full project lifecycles — budgeting, procurement, logistics — delivered on time and within budget, then turned into a data story that grew sponsor funding 40%.</p>
+  </div>
+</div>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Projects</h2><span class="idx mono">02 — Case studies</span></div>
+    <div class="proj-grid">
+
+      <!-- swap: F&B branch opening -->
+      <div class="proj reveal">
+        <div class="proj-photo"><div class="pimg" style="background-image:url('https://picsum.photos/seed/mo-fnb9/900/600')"></div><span class="ptag mono">Brand launch · Ops</span></div>
+        <div class="proj-body">
+          <h3>5 F&amp;B branches in 3 months</h3>
+          <div class="ctx">Multi-site retail rollout · Indonesia</div>
+          <p class="summary">Took five new food-and-beverage branches from zero to open in 90 days, treating each launch as a brand + ops + campaign sprint.</p>
+          <div class="metrics"><span class="chip"><b>50%+</b> revenue</span><span class="chip"><b>3</b> under budget</span><span class="chip"><b>90</b> days</span></div>
+          <details><summary><span class="chev">▶</span> How it was delivered</summary>
+            <ul><li>Standardized SOPs so every branch opened to the same quality bar.</li><li>Deployed POS systems and trained on-site teams for day-one operation.</li><li>Ran targeted local sales campaigns to drive launch-week traffic.</li><li>Managed budgets tightly — 3 of 5 branches came in 50% under budget.</li></ul>
+          </details>
+        </div>
+      </div>
+
+      <!-- swap: Solar Chapter site -->
+      <div class="proj reveal d1">
+        <div class="proj-photo"><div class="pimg" style="background-image:url('https://picsum.photos/seed/mo-solar9/900/600')"></div><span class="ptag mono">Impact · Fundraising</span></div>
+        <div class="proj-body">
+          <h3>Solar Chapter — water for 12 villages</h3>
+          <div class="ctx">Nonprofit program leadership · Indonesia</div>
+          <p class="summary">Led full project lifecycles to bring clean water to 6,000+ residents, then turned the results into a data story that grew sponsor funding.</p>
+          <div class="metrics"><span class="chip"><b>6,000+</b> residents</span><span class="chip"><b>12</b> villages</span><span class="chip"><b>+40%</b> funding</span></div>
+          <details><summary><span class="chev">▶</span> How it was delivered</summary>
+            <ul><li>Owned budgeting, procurement, and logistics end-to-end across remote sites.</li><li>Delivered every build on time and within budget.</li><li>Authored a data-driven post-implementation impact report.</li><li>The report secured a 40% increase in sponsor funding for the next cycle.</li></ul>
+          </details>
+        </div>
+      </div>
+
+      <!-- swap: clinic / health-tech setting -->
+      <div class="proj reveal">
+        <div class="proj-photo"><div class="pimg" style="background-image:url('https://picsum.photos/seed/mo-health9/900/600')"></div><span class="ptag mono">Healthtech · Govtech</span></div>
+        <div class="proj-body">
+          <h3>National health-screening app</h3>
+          <div class="ctx">Ministry of Health × Akselerasa · Indonesia</div>
+          <p class="summary">Shipped a citizen-facing app that, for the first time, let residents across 44 puskesmas access free health-screening results digitally.</p>
+          <div class="metrics"><span class="chip"><b>44</b> clinics</span><span class="chip"><b>~3,000</b> AI scans</span><span class="chip"><b>0</b> downtime</span></div>
+          <details><summary><span class="chev">▶</span> How it was delivered</summary>
+            <ul><li>Integrated national ID (KTP) data into a public-facing screening platform.</li><li>Coordinated an AI tuberculosis-detection trial between an India-based vendor and 2 hospitals.</li><li>Enforced strict patient-data privacy controls across ~3,000 chest X-ray scans.</li><li>Ran a hospital ERP migration with zero downtime and zero data loss.</li></ul>
+          </details>
+        </div>
+      </div>
+
+      <!-- swap: dashboard / ops workspace -->
+      <div class="proj reveal d1">
+        <div class="proj-photo"><div class="pimg" style="background-image:url('https://picsum.photos/seed/mo-aws9/900/600')"></div><span class="ptag mono">Program ops · Automation</span></div>
+        <div class="proj-body">
+          <h3>30+ projects on autopilot at AWS</h3>
+          <div class="ctx">Amazon Web Services · Seattle, USA</div>
+          <p class="summary">Built an automated Asana workflow and leadership dashboards that scaled oversight of 30+ concurrent projects across continents.</p>
+          <div class="metrics"><span class="chip"><b>+20%</b> productivity</span><span class="chip"><b>100%</b> on-time</span><span class="chip"><b>25+</b> SOPs</span></div>
+          <details><summary><span class="chev">▶</span> How it was delivered</summary>
+            <ul><li>Automated an Asana workflow to manage 30+ concurrent projects.</li><li>Generated leadership dashboards that drove a 20% productivity increase.</li><li>Connected IT warehouse teams across Europe and Asia.</li><li>Revamped 25+ SOPs, cutting error rates 20% and cycle time 10%.</li></ul>
+          </details>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BAND 2 · swap: a travel / map / cross-border photo -->
+<div class="band">
+  <div class="band-photo js-parallax" data-speed="0.13" style="background-image:url('https://picsum.photos/seed/mo-global9/1920/1200')"></div>
+  <div class="wrap reveal">
+    <div class="mono">Cross-border delivery</div>
+    <h2>Aligning teams across the US, Europe &amp; Asia.</h2>
+    <p>From Seattle to Jakarta, I connect international organizations with on-the-ground teams — and keep 30+ projects moving on a single source of truth.</p>
+  </div>
+</div>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Skills</h2><span class="idx mono">03 — Toolkit</span></div>
+    <div class="skill-grid">
+      <div class="skill-card reveal"><h3><span class="n">A1</span>Project Management</h3>
+        <div class="tags"><span class="tag">End-to-end delivery</span><span class="tag">Stakeholder mgmt</span><span class="tag">Vendor mgmt</span><span class="tag">Risk mgmt</span><span class="tag">Agile</span><span class="tag">SOPs</span></div>
+      </div>
+      <div class="skill-card reveal d1"><h3><span class="n">A2</span>Tools &amp; Data</h3>
+        <div class="tags"><span class="tag">Asana</span><span class="tag">Smartsheet</span><span class="tag">QuickSight</span><span class="tag">Tableau</span><span class="tag">SQL</span><span class="tag">Excel</span><span class="tag">POS</span><span class="tag">AI for ops</span></div>
+      </div>
+      <div class="skill-card reveal d2"><h3><span class="n">A3</span>Languages</h3>
+        <div class="tags"><span class="tag">English — fluent</span><span class="tag">Bahasa Indonesia — native</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="life">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Life</h2><span class="idx mono">04 — Off the clock</span></div>
+    <div class="hobby-grid">
+      <div class="hobby reveal">
+        <div class="k mono">/ Sports</div>
+        <h3>I keep moving.</h3>
+        <p>Staying active is how I reset. The discipline, teamwork, and "leave it all on the field" mindset are the same things I bring to a project deadline.</p>
+      </div>
+      <div class="hobby reveal d1">
+        <div class="k mono">/ Photography</div>
+        <h3>I shoot what I see.</h3>
+        <p>Wherever I travel, I'm framing it. Photography trains the same eye for detail and composition that makes for clean, considered work.</p>
+        <!-- swap these 4 with your own photos -->
+        <div class="photo-strip">
+          <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-p1/400/400')"></div>
+          <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-p2/400/400')"></div>
+          <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-p3/400/400')"></div>
+          <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-p4/400/400')"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Education</h2><span class="idx mono">05 — Credentials</span></div>
+    <div class="two-col">
+      <div class="panel reveal">
+        <h3>B.A., Business Administration</h3>
+        <div class="sub">University of Washington — Seattle, WA</div>
+        <div class="meta">Operations, Supply Chain Management &amp; Information Systems · GPA 3.65 · 2022</div>
+      </div>
+      <div class="panel reveal d1">
+        <h3>Certifications</h3>
+        <div class="cert-item"><div class="t">Project Management Professional (PMP)</div><div class="d">Project Management Institute · 05/2024 — 05/2027</div></div>
+        <div class="cert-item"><div class="t">SQL Data Cleaning &amp; Trend Analysis</div><div class="d">Analyzed global layoff data (2020–2023) using SQL to surface workforce trends.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSER · swap: a confident headshot or workspace photo -->
+<div class="closer" id="contact">
+  <div class="closer-photo js-parallax" data-speed="0.12" style="background-image:url('https://picsum.photos/seed/mo-closer9/1920/1200')"></div>
+  <div class="wrap reveal">
+    <div class="k mono">Get in touch</div>
+    <h2>Let's build something that ships.</h2>
+    <div class="cta-row">
+      <a class="btn btn-solid" href="mailto:Michael.orlanddo@gmail.com">Email me</a>
+      <a class="btn btn-out" href="https://linkedin.com/in/michaorlando" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span class="mono">© 2026 Michael Orlando</span>
+    <span class="mono">Jakarta, Indonesia · +62 822-2502-0469</span>
+    <span class="mono">Every project is day one</span>
+  </div>
+</footer>
+
+<script>
+  // smooth in-page navigation (Home + menu) — native, no library
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const id=a.getAttribute('href');
+      if(id.length<2)return;
+      const target=document.querySelector(id);
+      if(!target)return;
+      e.preventDefault();
+      const top=id==='#top'?0:target.getBoundingClientRect().top+(window.scrollY||window.pageYOffset)-56;
+      window.scrollTo({top,behavior:'smooth'});
+    });
+  });
+
+  // scroll reveals
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  window.addEventListener('load',()=>{setTimeout(()=>document.querySelector('.hl').classList.add('in'),120);});
+
+  // nav background once scrolled
+  const nav=document.getElementById('nav');
+  let ticking=false;
+  window.addEventListener('scroll',()=>{
+    if(ticking)return;ticking=true;
+    requestAnimationFrame(()=>{nav.classList.toggle('scrolled',(window.scrollY||window.pageYOffset)>50);ticking=false;});
+  },{passive:true});
+</script>
+</body>
+</html>
