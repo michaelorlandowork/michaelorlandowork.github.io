@@ -48,6 +48,18 @@
   .nav-links a{text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:600;color:var(--muted);transition:color .2s}
   .nav-links a:hover{color:var(--ink)}
   @media(max-width:720px){.nav-links{display:none}}
+  /* mobile nav (hamburger) */
+  .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:6px;width:42px;height:42px;background:none;border:0;cursor:pointer;padding:8px;z-index:80}
+  .nav-toggle span{display:block;width:26px;height:2px;background:var(--ink);transition:transform .3s,opacity .3s}
+  body.menu-open .nav-toggle span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+  body.menu-open .nav-toggle span:nth-child(2){opacity:0}
+  body.menu-open .nav-toggle span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+  body.menu-open{overflow:hidden}
+  .mobile-menu{position:fixed;inset:0;z-index:70;background:rgba(1,1,1,.97);backdrop-filter:blur(10px);display:flex;flex-direction:column;justify-content:center;padding:0 32px;opacity:0;pointer-events:none;transition:opacity .35s}
+  body.menu-open .mobile-menu{opacity:1;pointer-events:auto}
+  .mobile-menu a{display:flex;align-items:baseline;gap:16px;font-size:2rem;font-weight:800;letter-spacing:-.03em;color:var(--ink);padding:16px 0;border-bottom:1px solid var(--line)}
+  .mobile-menu a .n{color:var(--accent);font-size:.8rem;font-weight:600;letter-spacing:.16em}
+  @media(max-width:720px){.nav-toggle{display:flex}}
 
   /* hero */
   .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:120px 0 60px}
@@ -150,11 +162,12 @@
   /* life / hobbies */
   .hobby-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
   @media(max-width:760px){.hobby-grid{grid-template-columns:1fr}}
-  .hobby{background:var(--bg);padding:42px 36px}
+  .hobby{background:var(--bg);padding:42px 36px;display:flex;flex-direction:column}
   .hobby .k{margin-bottom:16px;color:var(--accent)}
   .hobby h3{font-size:2.1rem;font-weight:800;letter-spacing:-.03em}
   .hobby p{color:#b6b6b2;margin-top:14px;max-width:460px;font-size:1.02rem}
   .photo-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:26px}
+  .photo-strip.auto{margin-top:auto;padding-top:26px}
   .photo-strip .ph{aspect-ratio:1/1;background-size:cover;background-position:center;border-radius:2px;transition:transform .4s}
   .photo-strip .ph:hover{transform:scale(1.04)}
 
@@ -205,8 +218,18 @@
       <a href="#life">Life</a>
       <a href="#contact">Contact</a>
     </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#top"><span class="n">01</span>Home</a>
+  <a href="#work"><span class="n">02</span>Work</a>
+  <a href="#projects"><span class="n">03</span>Projects</a>
+  <a href="#skills"><span class="n">04</span>Skills</a>
+  <a href="#life"><span class="n">05</span>Life</a>
+  <a href="#contact"><span class="n">06</span>Contact</a>
+</div>
 
 <!-- HERO · swap: a wide, moody photo of you on-site or a Jakarta street at dusk -->
 <header class="hero" id="top">
@@ -388,13 +411,20 @@
         <div class="k mono">/ Sports</div>
         <h3>I keep moving.</h3>
         <p>Staying active is how I reset. The discipline, teamwork, and "leave it all on the field" mindset are the same things I bring to a project deadline.</p>
+        <!-- swap these 4 with your own photos -->
+        <div class="photo-strip auto">
+          <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-s1/400/400')"></div>
+          <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-s2/400/400')"></div>
+          <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-s3/400/400')"></div>
+          <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-s4/400/400')"></div>
+        </div>
       </div>
       <div class="hobby reveal d1">
         <div class="k mono">/ Photography</div>
         <h3>I shoot what I see.</h3>
         <p>Wherever I travel, I'm framing it. Photography trains the same eye for detail and composition that makes for clean, considered work.</p>
         <!-- swap these 4 with your own photos -->
-        <div class="photo-strip">
+        <div class="photo-strip auto">
           <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-p1/400/400')"></div>
           <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-p2/400/400')"></div>
           <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-p3/400/400')"></div>
@@ -430,7 +460,7 @@
     <div class="k mono">Get in touch</div>
     <h2>Let's build something that ships.</h2>
     <div class="cta-row">
-      <a class="btn btn-solid" href="mailto:Michael.orlanddo@gmail.com">Email me</a>
+      <a class="btn btn-solid" href="/cdn-cgi/l/email-protection#400d29232821252c6e2f322c212e24242f00272d21292c6e232f2d">Email me</a>
       <a class="btn btn-out" href="https://linkedin.com/in/michaorlando" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
@@ -444,7 +474,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // smooth in-page navigation (Home + menu) — native, no library
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click',e=>{
@@ -465,6 +495,17 @@
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
   window.addEventListener('load',()=>{setTimeout(()=>document.querySelector('.hl').classList.add('in'),120);});
+
+  // mobile hamburger menu
+  const navToggle=document.getElementById('navToggle');
+  const mobileMenu=document.getElementById('mobileMenu');
+  function setMenu(open){
+    document.body.classList.toggle('menu-open',open);
+    navToggle.setAttribute('aria-expanded',open?'true':'false');
+    navToggle.setAttribute('aria-label',open?'Close menu':'Open menu');
+  }
+  navToggle.addEventListener('click',()=>setMenu(!document.body.classList.contains('menu-open')));
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
 
   // nav background once scrolled
   const nav=document.getElementById('nav');
