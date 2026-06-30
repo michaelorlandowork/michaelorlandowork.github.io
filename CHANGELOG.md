@@ -5,6 +5,59 @@ When we make a change, we add a dated entry here.
 
 ---
 
+## 2026-06-30 (session 4)
+
+- **UW photo moved** from Band 2 to the **Education** section — it's now a dimmed
+  full-bleed background behind the credential cards (the friends-on-a-couch shot
+  read oddly under the "cross-border delivery" band). Panels are now slightly
+  translucent so the campus photo shows through.
+- **Band 2** (cross-border / "US, Europe & Asia") now uses a free Unsplash stock
+  photo — an airplane over clouds at golden hour — until a real travel photo exists.
+- **Logos fixed:** Solar badge now points to the real `logos/solar.jpg` (was still
+  showing the "SC" monogram placeholder). Logo chips changed from near-black to
+  **white** so the dark AWS wordmark is readable. All four badges are now real.
+- **Folder reorganized:** all of Michael's site photos moved into a `photos/`
+  subfolder; `index.html` paths updated. Tidied `logos/` (removed the placeholder
+  `solar.png` and the duplicate `moh.svg`). Moved the spare `hero.JPG` and the
+  dev `screenshots/` + `uploads/` folders out to `../photo-originals/`.
+
+## 2026-06-30 (session 3)
+
+- **Real photos added** — replaced most web placeholders with Michael's own shots,
+  converted from HEIC/large originals, auto-oriented, compressed, and renamed:
+  - **Hero** → `hero-ballard.jpg` (Ballard Ave NW street scene; swapped in for the old `hero.JPG`).
+  - **Band 1** → `band-water.jpg` (Solar Chapter clean-water pipe install).
+  - **Band 2** → `band-uw.jpg` (University of Washington "W", Seattle).
+  - **Solar project card** → `project-solar.jpg` (villagers installing solar panels).
+  - **AWS project card** → `project-aws.jpg` (logistics warehouse / pallets).
+  - **Photography squares** → `photo-1…4.jpg` (kids w/ jerry cans, basket carry, water scoop, dusk spring).
+- **Stock fill (3 slots)** — no real photo yet, so used free Unsplash hot-links
+  (same pattern as Sports): **F&B** card (cafe interior), **Health** card
+  (laptop + stethoscope), **closer** (workspace). Swap for real photos later.
+- **Original full-size photos** backed up to `../photo-originals/` (kept out of the
+  Website folder so the GitHub upload stays small). Old `hero.JPG` kept as a spare.
+
+## 2026-06-30 (session 2)
+
+- **Mobile version:** added a hamburger menu (≤720px) that opens a full-screen
+  nav, since the desktop nav links were hidden on phones with nothing to replace
+  them. The rest of the layout was already responsive.
+- **Page transition:** added an intro curtain (name → lifts to reveal hero) and a
+  fade-out when leaving to the résumé / LinkedIn. Made it self-removing so content
+  can never be trapped behind the overlay.
+- **Removed** "SQL Data Cleaning & Trend Analysis" from Certifications (PMP only now).
+- **Work — Ministry of Health × Akselerasa** bullets updated: "44 community health
+  centers (puskesmas)", added "...while restoring the staff attendance system", and
+  added the 5 F&B branches bullet.
+- **Sports** reworked: named real activities — **Tennis, Hyrox, Half Marathon** —
+  each with its own copy. Clicking a photo now opens an enlarged **lightbox** with
+  a title + description. Swapped in fitting real stock photos.
+- **Photography:** added a credit line — "Every photograph on this site — these
+  included — is one of mine."
+- **Work logos:** added a logo badge to each role with auto-fallback to initials;
+  created `logos/` with monogram placeholders (`moh`, `aws`, `solar`, `alfamart`).
+- Balanced the **Life** section so Sports and Photography each have a photo strip.
+
 ## 2026-06-30
 
 - **Live on GitHub Pages** at https://michaelorlandowork.github.io/
@@ -35,20 +88,19 @@ When we make a change, we add a dated entry here.
 
 ## Plan / to do (next session)
 
-**1. Mobile (phone) version**
-- [ ] Make sure the site looks and works great on phones (recruiters will open it on mobile).
+**1. Real photos**
+- [x] Replace placeholder photos with real ones — hero, both bands, Solar + AWS
+      cards, and all four photography squares are now Michael's own.
+- [ ] Replace the 3 remaining Unsplash stock fills with real photos when available:
+      F&B branch opening, health clinic, and a confident headshot for the closer.
+- [ ] Add real company logos to `logos/` (moh, aws, solar, alfamart) to replace
+      the initial monograms.
 
-**2. Content fixes**
-- [ ] Rethink the "Work" section — feels too CV-like. Explore a less résumé-y framing (heading + presentation). *Undecided — brainstorm options first.*
-- [ ] Replace ALL placeholder photos (projects, bands, hobby squares) with real ones. Hero is already real.
-- [ ] Remove "SQL Data Cleaning & Trend Analysis" from Certifications.
-- [ ] Make the Sports + Photography blurbs specific — name actual activities (e.g. tennis, running, Hyrox) instead of generic copy.
+**2. Content**
+- [ ] Rethink the "Work" section framing — still a little CV-like. *Undecided.*
 
 **3. Contact**
 - [ ] Add a WhatsApp contact option (button/link).
-
-**4. Research**
-- [ ] Research what makes a good personal/portfolio website — apply best practices.
 
 ## Other ideas (parked)
 

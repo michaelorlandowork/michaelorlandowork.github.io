@@ -13,9 +13,10 @@
   PALETTE: two colors only — #010101 (black) + #FFFFFF (white),
   with grayscale derived from those two. No accent color.
   FONT: Inter (clean Helvetica-style grotesk), heavy weights for display.
-  PHOTOS: styled PLACEHOLDERS (picsum.photos), rendered dark + grayscale
-  so random images read as one intentional set. To use your own, drop a
-  file in this folder and replace the URL. Comments mark what fits each spot.
+  PHOTOS: mostly Michael's own (hero, bands, Solar + AWS cards, photo squares).
+  Three slots (F&B, Health, closer) use free Unsplash stock until real photos
+  exist. To swap any, drop a file in this folder and replace the URL. Comments
+  mark what fits each spot.
   ============================================================
 -->
 <style>
@@ -115,6 +116,11 @@
   .xp ul{list-style:none;margin-top:16px;max-width:840px;display:flex;flex-direction:column;gap:9px}
   .xp ul li{position:relative;padding-left:24px;color:#b6b6b2;font-size:1rem}
   .xp ul li::before{content:'—';position:absolute;left:0;color:var(--accent)}
+  .xp-id{display:flex;align-items:center;gap:18px}
+  .xp-logo{position:relative;width:54px;height:54px;flex:none;border:1px solid var(--line);border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .xp-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:7px;background:#fff}
+  .xp-logo span{font-weight:800;font-size:.8rem;letter-spacing:.01em;color:#0c0c0c}
+  @media(max-width:520px){.xp-logo{width:44px;height:44px}.xp-id{gap:13px}}
 
   /* band */
   .band{position:relative;min-height:80vh;display:flex;align-items:flex-end;overflow:hidden}
@@ -168,13 +174,39 @@
   .hobby p{color:#b6b6b2;margin-top:14px;max-width:460px;font-size:1.02rem}
   .photo-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:26px}
   .photo-strip.auto{margin-top:auto;padding-top:26px}
-  .photo-strip .ph{aspect-ratio:1/1;background-size:cover;background-position:center;border-radius:2px;transition:transform .4s}
+  .photo-strip.sports-strip{grid-template-columns:repeat(3,1fr)}
+  .photo-strip .ph{position:relative;aspect-ratio:1/1;background-size:cover;background-position:center;border-radius:2px;transition:transform .4s;overflow:hidden}
   .photo-strip .ph:hover{transform:scale(1.04)}
+  .sports-strip .ph{cursor:pointer}
+  .sports-strip .ph .cap{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:14px;background:linear-gradient(180deg,rgba(1,1,1,.12),rgba(1,1,1,.88));color:#cfcfca;font-size:.78rem;line-height:1.34;opacity:0;transition:opacity .3s}
+  .sports-strip .ph .cap b{color:#fff;font-size:.92rem;font-weight:800;margin-bottom:5px;letter-spacing:-.01em}
+  .sports-strip .ph.show .cap,.sports-strip .ph:hover .cap{opacity:1}
+  .sports-hint{margin-top:auto;padding-top:26px;display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.16em}
+  .sports-hint b{color:var(--accent);font-weight:700}
+  .photo-credit{margin-top:16px;display:flex;align-items:center;gap:9px;color:#8a8a8a;font-size:.82rem}
+  .photo-credit .dot{color:var(--accent);font-size:.55rem}
+
+  /* sports lightbox */
+  #lightbox{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(1,1,1,.86);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .35s}
+  #lightbox.open{opacity:1;pointer-events:auto}
+  .lb-card{display:flex;flex-direction:column;max-width:540px;width:100%;background:#0a0a0a;border:1px solid var(--line);border-radius:4px;overflow:hidden;transform:scale(.9);transition:transform .4s cubic-bezier(.16,1,.3,1)}
+  #lightbox.open .lb-card{transform:none}
+  .lb-img{aspect-ratio:4/3;background-size:cover;background-position:center}
+  .lb-body{padding:26px 30px 32px}
+  .lb-k{color:var(--accent);text-transform:uppercase;letter-spacing:.16em;font-size:.7rem;font-weight:600;margin-bottom:12px}
+  .lb-title{font-size:1.9rem;font-weight:800;letter-spacing:-.03em;color:var(--ink);margin-bottom:12px}
+  .lb-desc{color:#b6b6b2;font-size:1.02rem;line-height:1.5}
+  .lb-close{position:absolute;top:22px;right:26px;width:44px;height:44px;border:1px solid var(--line);background:rgba(0,0,0,.45);color:#fff;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
+  .lb-close:hover{background:rgba(0,0,0,.8);border-color:var(--ink)}
 
   /* education */
+  #education{position:relative;overflow:hidden}
+  .edu-photo{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center}
+  .edu-photo::after{content:'';position:absolute;inset:0;background:rgba(1,1,1,.80)}
+  #education .wrap{position:relative;z-index:2}
   .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
   @media(max-width:760px){.two-col{grid-template-columns:1fr}}
-  .panel{background:var(--bg);padding:36px 32px}
+  .panel{background:rgba(8,8,8,.78);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);padding:36px 32px}
   .panel h3{font-size:1.4rem;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
   .panel .sub{color:var(--ink);font-size:.98rem}
   .panel .meta{color:var(--muted);font-size:.9rem;margin-top:6px}
@@ -203,9 +235,22 @@
   .hl.in .line i{transform:none;opacity:1}
   .hl.in .line:nth-child(2) i{transition-delay:.12s}
   @media(prefers-reduced-motion:reduce){.reveal,.hl .line i{opacity:1;transform:none;transition:none}.hero-photo,.band-photo,.closer-photo{transform:none!important}}
+
+  /* page transition curtain */
+  #curtain{position:fixed;inset:0;z-index:200;background:#010101;display:flex;align-items:center;justify-content:center;transition:transform .9s cubic-bezier(.76,0,.24,1)}
+  #curtain .mark{font-weight:800;font-size:1.4rem;letter-spacing:-.02em;color:var(--ink);opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
+  #curtain .mark .d{color:var(--accent)}
+  body:not(.loaded) #curtain .mark{opacity:1;transform:none}
+  body.loaded #curtain{transform:translateY(-100%);pointer-events:none}
+  #curtain.gone{display:none}
+  body.leaving #curtain{transform:translateY(0);transition:transform .55s cubic-bezier(.76,0,.24,1)}
+  body.leaving #curtain .mark{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){#curtain{display:none}}
 </style>
 </head>
 <body>
+
+<div id="curtain"><span class="mark">Michael Orlando<span class="d">.</span></span></div>
 
 <nav id="nav">
   <div class="wrap nav-inner">
@@ -231,12 +276,12 @@
   <a href="#contact"><span class="n">06</span>Contact</a>
 </div>
 
-<!-- HERO · swap: a wide, moody photo of you on-site or a Jakarta street at dusk -->
+<!-- HERO · hero-ballard.jpg (Ballard Ave NW street scene). swap: a wide, moody street / on-site photo -->
 <header class="hero" id="top">
-  <div class="hero-photo js-parallax" data-speed="0.16" style="background-image:url('hero.JPG')"></div>
+  <div class="hero-photo js-parallax" data-speed="0.16" style="background-image:url('photos/hero-ballard.jpg')"></div>
   <div class="wrap">
     <div class="tagline mono">Project Manager · PMP · Jakarta ↔ Seattle</div>
-    <h1 class="hl"><span class="line"><i>I build things</i></span><span class="line ghost"><i>that reach people.</i></span></h1>
+    <h1 class="hl"><span class="line"><i>I build things</i></span><span class="line ghost"><i style="color: rgb(242, 106, 33)">that reach people.</i></span></h1>
     <div class="hero-lower">
       <p class="body">From clean water in <b>12 villages</b> to national health apps used across <b>44 clinics</b> — I'm a PMP-certified project manager who connects international teams with on-the-ground delivery in Indonesia.</p>
       <div class="cta-row">
@@ -268,15 +313,16 @@
     <div class="sec-head reveal"><h2>Work</h2><span class="idx mono">01 — Experience</span></div>
     <div class="xp">
       <div class="xp-row">
-        <div class="xp-top"><div><div class="xp-role">Project Manager</div><div class="xp-org">Ministry of Health × Akselerasa — Jakarta, Indonesia</div></div><div class="mono">02/2025 — Now</div></div>
+        <div class="xp-top"><div class="xp-id"><div class="xp-logo"><img src="logos/moh.png" alt="" onerror="this.remove()"><span>MoH</span></div><div><div class="xp-role">Project Manager</div><div class="xp-org">Ministry of Health × Akselerasa — Jakarta, Indonesia</div></div></div><div class="mono">02/2025 — Now</div></div>
         <ul>
-          <li>Delivered a citizen-facing app for a national free health-screening program, integrating national ID (KTP) data so residents across 44 puskesmas could access screening results digitally for the first time.</li>
+          <li>Delivered a citizen-facing app for a national free health-screening program, integrating national ID (KTP) data so residents across 44 community health centers (puskesmas) could access screening results digitally for the first time.</li>
           <li>Coordinated an AI tuberculosis-detection clinical trial between an India-based AI vendor and 2 government hospitals, enabling ~3,000 chest X-ray scans under strict patient-data privacy controls.</li>
-          <li>Led a government hospital ERP migration with zero downtime and zero data loss, navigating a broken vendor relationship and missing source code.</li>
+          <li>Led a government hospital ERP migration with zero downtime and zero data loss, navigating a broken vendor relationship and missing source code while restoring the staff attendance system.</li>
+          <li>Launched 5 food-and-beverage branches in 3 months, driving 50%+ revenue growth through standardized SOPs, POS deployment, and targeted sales campaigns — 3 branches delivered 50% under budget.</li>
         </ul>
       </div>
       <div class="xp-row">
-        <div class="xp-top"><div><div class="xp-role">Project Coordinator</div><div class="xp-org">Amazon Web Services — Seattle, WA, USA</div></div><div class="mono">09/2022 — 09/2024</div></div>
+        <div class="xp-top"><div class="xp-id"><div class="xp-logo"><img src="logos/aws.png" alt="" onerror="this.remove()"><span>AWS</span></div><div><div class="xp-role">Project Coordinator</div><div class="xp-org">Amazon Web Services — Seattle, WA, USA</div></div></div><div class="mono">09/2022 — 09/2024</div></div>
         <ul>
           <li>Implemented an automated Asana workflow managing 30+ concurrent projects, generating leadership dashboards that drove a 20% productivity increase and a 100% on-time delivery rate.</li>
           <li>Spearheaded a cross-continental knowledge-sharing program connecting IT warehouse teams across Europe and Asia, delivering 2 process-improvement projects.</li>
@@ -284,14 +330,14 @@
         </ul>
       </div>
       <div class="xp-row">
-        <div class="xp-top"><div><div class="xp-role">Lead Project Manager</div><div class="xp-org">Solar Chapter — Seattle, USA / Indonesia</div></div><div class="mono">01/2019 — 05/2024</div></div>
+        <div class="xp-top"><div class="xp-id"><div class="xp-logo"><img src="logos/solar.jpg" alt="" onerror="this.remove()"><span>SC</span></div><div><div class="xp-role">Lead Project Manager</div><div class="xp-org">Solar Chapter — Seattle, USA / Indonesia</div></div></div><div class="mono">01/2019 — 05/2024</div></div>
         <ul>
           <li>Delivered clean-water access to 6,000+ residents across 12 Indonesian villages, leading full project lifecycles — budgeting, procurement, and logistics — on time and within budget.</li>
           <li>Produced a data-driven post-implementation impact report that secured a 40% increase in sponsor funding.</li>
         </ul>
       </div>
       <div class="xp-row">
-        <div class="xp-top"><div><div class="xp-role">Business Analyst Intern</div><div class="xp-org">Alfamart — Jakarta, Indonesia</div></div><div class="mono">06/2021 — 09/2021</div></div>
+        <div class="xp-top"><div class="xp-id"><div class="xp-logo"><img src="logos/alfamart.png" alt="" onerror="this.remove()"><span>AM</span></div><div><div class="xp-role">Business Analyst Intern</div><div class="xp-org">Alfamart — Jakarta, Indonesia</div></div></div><div class="mono">06/2021 — 09/2021</div></div>
         <ul>
           <li>Optimized product-placement strategy using SQL, Excel, and Tableau, improving market-expansion efficiency by 18% across grocery locations.</li>
           <li>Analyzed sales history to align promotional campaigns with supplier targets, surpassing the annual sales goal by 20%.</li>
@@ -301,9 +347,9 @@
   </div>
 </section>
 
-<!-- BAND 1 · swap: a Solar Chapter village / clean-water photo -->
+<!-- BAND 1 · band-water.jpg (Solar Chapter clean-water pipe install). swap: a village / clean-water photo -->
 <div class="band">
-  <div class="band-photo js-parallax" data-speed="0.13" style="background-image:url('https://picsum.photos/seed/mo-water9/1920/1200')"></div>
+  <div class="band-photo js-parallax" data-speed="0.13" style="background-image:url('photos/band-water.jpg')"></div>
   <div class="wrap reveal">
     <div class="mono">Impact at scale</div>
     <h2>Clean water for 6,000+ people, across 12 villages.</h2>
@@ -316,9 +362,9 @@
     <div class="sec-head reveal"><h2>Projects</h2><span class="idx mono">02 — Case studies</span></div>
     <div class="proj-grid">
 
-      <!-- swap: F&B branch opening -->
+      <!-- F&B · Unsplash stock (cafe interior) — replace with a real branch-opening photo when ready -->
       <div class="proj reveal">
-        <div class="proj-photo"><div class="pimg" style="background-image:url('https://picsum.photos/seed/mo-fnb9/900/600')"></div><span class="ptag mono">Brand launch · Ops</span></div>
+        <div class="proj-photo"><div class="pimg" style="background-image:url('https://images.unsplash.com/photo-1679241766152-0e47cd92a734?w=1200&q=80&fit=crop&auto=format')"></div><span class="ptag mono">Brand launch · Ops</span></div>
         <div class="proj-body">
           <h3>5 F&amp;B branches in 3 months</h3>
           <div class="ctx">Multi-site retail rollout · Indonesia</div>
@@ -330,9 +376,9 @@
         </div>
       </div>
 
-      <!-- swap: Solar Chapter site -->
+      <!-- Solar · project-solar.jpg (villagers installing solar panels) -->
       <div class="proj reveal d1">
-        <div class="proj-photo"><div class="pimg" style="background-image:url('https://picsum.photos/seed/mo-solar9/900/600')"></div><span class="ptag mono">Impact · Fundraising</span></div>
+        <div class="proj-photo"><div class="pimg" style="background-image:url('photos/project-solar.jpg')"></div><span class="ptag mono">Impact · Fundraising</span></div>
         <div class="proj-body">
           <h3>Solar Chapter — water for 12 villages</h3>
           <div class="ctx">Nonprofit program leadership · Indonesia</div>
@@ -344,9 +390,9 @@
         </div>
       </div>
 
-      <!-- swap: clinic / health-tech setting -->
+      <!-- Health · Unsplash stock (laptop + stethoscope) — replace with a real clinic photo when ready -->
       <div class="proj reveal">
-        <div class="proj-photo"><div class="pimg" style="background-image:url('https://picsum.photos/seed/mo-health9/900/600')"></div><span class="ptag mono">Healthtech · Govtech</span></div>
+        <div class="proj-photo"><div class="pimg" style="background-image:url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&q=80&fit=crop&auto=format')"></div><span class="ptag mono">Healthtech · Govtech</span></div>
         <div class="proj-body">
           <h3>National health-screening app</h3>
           <div class="ctx">Ministry of Health × Akselerasa · Indonesia</div>
@@ -358,9 +404,9 @@
         </div>
       </div>
 
-      <!-- swap: dashboard / ops workspace -->
+      <!-- AWS · project-aws.jpg (logistics warehouse / pallets) -->
       <div class="proj reveal d1">
-        <div class="proj-photo"><div class="pimg" style="background-image:url('https://picsum.photos/seed/mo-aws9/900/600')"></div><span class="ptag mono">Program ops · Automation</span></div>
+        <div class="proj-photo"><div class="pimg" style="background-image:url('photos/project-aws.jpg')"></div><span class="ptag mono">Program ops · Automation</span></div>
         <div class="proj-body">
           <h3>30+ projects on autopilot at AWS</h3>
           <div class="ctx">Amazon Web Services · Seattle, USA</div>
@@ -376,9 +422,9 @@
   </div>
 </section>
 
-<!-- BAND 2 · swap: a travel / map / cross-border photo -->
+<!-- BAND 2 · Unsplash stock (airplane over clouds) — cross-border / travel. swap for a real photo when ready -->
 <div class="band">
-  <div class="band-photo js-parallax" data-speed="0.13" style="background-image:url('https://picsum.photos/seed/mo-global9/1920/1200')"></div>
+  <div class="band-photo js-parallax" data-speed="0.13" style="background-image:url('https://images.unsplash.com/photo-1539612793508-4539a972242b?w=1920&q=80&fit=crop&auto=format')"></div>
   <div class="wrap reveal">
     <div class="mono">Cross-border delivery</div>
     <h2>Aligning teams across the US, Europe &amp; Asia.</h2>
@@ -411,12 +457,12 @@
         <div class="k mono">/ Sports</div>
         <h3>I keep moving.</h3>
         <p>Staying active is how I reset. The discipline, teamwork, and "leave it all on the field" mindset are the same things I bring to a project deadline.</p>
-        <!-- swap these 4 with your own photos -->
-        <div class="photo-strip auto">
-          <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-s1/400/400')"></div>
-          <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-s2/400/400')"></div>
-          <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-s3/400/400')"></div>
-          <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-s4/400/400')"></div>
+        <div class="sports-hint"><b>Tap</b> a photo for the story</div>
+        <!-- swap these 3 with your own photos -->
+        <div class="photo-strip auto sports-strip">
+          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?w=800&q=80&fit=crop&auto=format')"><span class="cap"><b>Tennis</b>Two or three sets after work. The footwork's a work in progress; the competitiveness isn't.</span></div>
+          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&q=80&fit=crop&auto=format')"><span class="cap"><b>Hyrox</b>One in the books — eight runs, eight stations. Proof that pacing beats panic.</span></div>
+          <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=800&q=80&fit=crop&auto=format')"><span class="cap"><b>Half Marathon</b>21.1 km, done. The training is the project; race day is just shipping it.</span></div>
         </div>
       </div>
       <div class="hobby reveal d1">
@@ -425,17 +471,20 @@
         <p>Wherever I travel, I'm framing it. Photography trains the same eye for detail and composition that makes for clean, considered work.</p>
         <!-- swap these 4 with your own photos -->
         <div class="photo-strip auto">
-          <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-p1/400/400')"></div>
-          <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-p2/400/400')"></div>
-          <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-p3/400/400')"></div>
-          <div class="ph" style="background-image:url('https://picsum.photos/seed/mo-p4/400/400')"></div>
+          <div class="ph" style="background-image:url('photos/photo-1.jpg')"></div>
+          <div class="ph" style="background-image:url('photos/photo-2.jpg')"></div>
+          <div class="ph" style="background-image:url('photos/photo-3.jpg')"></div>
+          <div class="ph" style="background-image:url('photos/photo-4.jpg')"></div>
         </div>
+        <div class="photo-credit"><span class="dot">●</span> Every photograph on this site — these included — is one of mine.</div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="education" style="padding-top:0">
+<!-- EDUCATION · band-uw.jpg background (University of Washington — Seattle) -->
+<section id="education" style="padding:96px 0">
+  <div class="edu-photo js-parallax" data-speed="0.10" style="background-image:url('photos/band-uw.jpg')"></div>
   <div class="wrap">
     <div class="sec-head reveal"><h2>Education</h2><span class="idx mono">05 — Credentials</span></div>
     <div class="two-col">
@@ -447,21 +496,32 @@
       <div class="panel reveal d1">
         <h3>Certifications</h3>
         <div class="cert-item"><div class="t">Project Management Professional (PMP)</div><div class="d">Project Management Institute · 05/2024 — 05/2027</div></div>
-        <div class="cert-item"><div class="t">SQL Data Cleaning &amp; Trend Analysis</div><div class="d">Analyzed global layoff data (2020–2023) using SQL to surface workforce trends.</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CLOSER · swap: a confident headshot or workspace photo -->
+<!-- CLOSER · Unsplash stock (workspace) — swap for a confident headshot when ready -->
 <div class="closer" id="contact">
-  <div class="closer-photo js-parallax" data-speed="0.12" style="background-image:url('https://picsum.photos/seed/mo-closer9/1920/1200')"></div>
+  <div class="closer-photo js-parallax" data-speed="0.12" style="background-image:url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1920&q=80&fit=crop&auto=format')"></div>
   <div class="wrap reveal">
     <div class="k mono">Get in touch</div>
     <h2>Let's build something that ships.</h2>
     <div class="cta-row">
-      <a class="btn btn-solid" href="/cdn-cgi/l/email-protection#400d29232821252c6e2f322c212e24242f00272d21292c6e232f2d">Email me</a>
+      <a class="btn btn-solid" href="mailto:Michael.orlanddo@gmail.com">Email me</a>
       <a class="btn btn-out" href="https://linkedin.com/in/michaorlando" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</div>
+
+<div id="lightbox" aria-hidden="true">
+  <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  <div class="lb-card">
+    <div class="lb-img" id="lbImg"></div>
+    <div class="lb-body">
+      <div class="lb-k">/ Sports</div>
+      <div class="lb-title" id="lbTitle"></div>
+      <div class="lb-desc" id="lbDesc"></div>
     </div>
   </div>
 </div>
@@ -474,7 +534,7 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // smooth in-page navigation (Home + menu) — native, no library
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click',e=>{
@@ -494,7 +554,39 @@
   },{threshold:0.15});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
+  // sports tiles: click to open enlarged lightbox with description
+  const lb=document.getElementById('lightbox');
+  const lbImg=document.getElementById('lbImg'),lbTitle=document.getElementById('lbTitle'),lbDesc=document.getElementById('lbDesc');
+  function openLB(tile){
+    const cap=tile.querySelector('.cap');
+    const title=cap.querySelector('b').textContent;
+    lbImg.style.backgroundImage=tile.style.backgroundImage;
+    lbTitle.textContent=title;
+    lbDesc.textContent=cap.textContent.replace(title,'').trim();
+    lb.classList.add('open');document.body.classList.add('menu-open');
+  }
+  function closeLB(){lb.classList.remove('open');document.body.classList.remove('menu-open');}
+  document.querySelectorAll('.sports-strip .ph').forEach(t=>t.addEventListener('click',()=>openLB(t)));
+  document.getElementById('lbClose').addEventListener('click',closeLB);
+  lb.addEventListener('click',e=>{if(e.target===lb)closeLB();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.classList.contains('open'))closeLB();});
+
   window.addEventListener('load',()=>{setTimeout(()=>document.querySelector('.hl').classList.add('in'),120);});
+
+  // page transition: lift curtain on load, drop it when leaving to an external page/file
+  function liftCurtain(){document.body.classList.add('loaded');setTimeout(()=>document.querySelector('.hl').classList.add('in'),500);setTimeout(()=>{const c=document.getElementById('curtain');if(c)c.classList.add('gone');},1100);}
+  if(document.readyState==='complete'){liftCurtain();}else{window.addEventListener('load',liftCurtain);}
+  // fade out when navigating away (résumé download, LinkedIn, etc.)
+  document.querySelectorAll('a[href]:not([href^="#"])').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const href=a.getAttribute('href');
+      if(href.startsWith('mailto:')||a.hasAttribute('download')||a.target==='_blank')return; // let these proceed normally
+      e.preventDefault();
+      document.body.classList.add('leaving');
+      document.getElementById('curtain').classList.remove('gone');
+      setTimeout(()=>{window.location.href=href;},560);
+    });
+  });
 
   // mobile hamburger menu
   const navToggle=document.getElementById('navToggle');
